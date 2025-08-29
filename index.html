@@ -23,6 +23,24 @@
 		<link rel="stylesheet" href="/assets/css/style.css" />
 		<link rel="stylesheet" href="/assets/css/prism.css" />
 		<link rel="stylesheet" href="/assets/css/media.css" />
+		<script>
+			// Get product name from URL (supports both path and query ?product=)
+			const url = new URL(window.location.href);
+			let productName = url.searchParams.get("product"); // check ?product=PayFlex
+			if (!productName) {
+				const pathParts = url.pathname.split("/").filter(Boolean);
+				productName = pathParts[pathParts.length - 1] || "PayFlex"; // fallback
+			}
+
+			// Capitalize first letter
+			productName = productName.charAt(0).toUpperCase() + productName.slice(1);
+
+			// Fill in placeholders
+			for (let i = 1; i <= 8; i++) {
+				const el = document.getElementById(`product-${i}`);
+				if (el) el.textContent = productName;
+			}
+		</script>
 	</head>
 	<body>
 		<!--========================= [ Loader Sppier Design Start ] =========================-->
@@ -386,62 +404,56 @@
 								</div>
 								<div class="gx-card-content">
 									<div class="intero">
+										<h1 class="main-heading">Introduction</h1>
+										<p class="popins-data-helpex">
+											Welcome to the official documentation for
+											<strong id="product-1"></strong> Payment Gateway! This
+											guide will help you integrate
+											<span id="product-2"></span> into your website, mobile
+											application, or backend service to securely process
+											payments worldwide.
+										</p>
+
+										<h2 class="main-heading">Product Information</h2>
 										<ul class="auth-detail">
 											<li class="auth-detail-li">
-												<strong>Item Name :</strong>
-												Helpex - Online Documentation Template.
+												<strong>Product Name:</strong>
+												<span id="product-3"></span> – Secure Payment Gateway
 											</li>
 											<li class="auth-detail-li">
-												<strong>Item Version :</strong>
-												3.1.0
+												<strong>Version:</strong> 1.0.0
 											</li>
 											<li class="auth-detail-li">
-												<strong>Author :</strong>
-												The_krishna
+												<strong>Author:</strong>
+												<span id="product-4"></span> Dev Team
 											</li>
 											<li class="auth-detail-li">
-												<strong>Copyright :</strong>
-												2025
+												<strong>Copyright:</strong> 2025
+												<span id="product-5"></span> Technologies
 											</li>
 										</ul>
+
 										<p class="popins-data-helpex">
-											Welcome to the documentation for the Helpex template! This
-											page will guide you on how to use and customize the
-											template to suit your needs.
-										</p>
-										<h1 class="main-heading">
-											Helpex - Online Documentation Template.
-										</h1>
-										<p class="popins-data-helpex">
-											An online documentation HTML template is a pre-designed
-											structure and layout that helps developers and creators
-											present their template, projects, or products in an
-											organized and user-friendly manner on the web. It serves
-											as a guide or reference for users, providing comprehensive
-											information about the template's features, installation
-											process, usage instructions, and other essential details.
+											<span id="product-6"></span> allows businesses to accept
+											online payments seamlessly through cards, digital wallets,
+											UPI, and bank transfers. With enterprise-grade security
+											and developer-friendly APIs,
+											<span id="product-7"></span> ensures safe and reliable
+											transactions for your customers.
 										</p>
 										<p class="popins-data-helpex">
-											The primary purpose of an online documentation HTML
-											template is to facilitate effective communication between
-											the developers and end-users by offering a clear and
-											easy-to-navigate interface for accessing relevant
-											information. Below is a brief description of the key
-											components typically found in an online documentation HTML
-											template:
-										</p>
-										<p class="popins-data-helpex">
-											An effective online documentation HTML template provides
-											clear and concise information, encourages user engagement,
-											and enhances the overall user experience. It simplifies
-											the process of creating comprehensive documentation and
-											helps developers deliver a valuable product to their
-											users.
+											This documentation will guide you through the process of
+											setting up <span id="product-8"></span>, generating API
+											keys, integrating the SDK, and customizing the checkout
+											experience. Whether you are a beginner or an experienced
+											developer, this guide will help you quickly get started
+											with payment integration.
 										</p>
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<!--=============== [ Core Features ] ===============-->
 						<div class="gx-block" id="core_features">
 							<div class="gx-card gx-page-block">
@@ -455,678 +467,30 @@
 								</div>
 								<div class="gx-card-content">
 									<div class="intero">
-										<div class="row core-boxes">
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/bootstrap-5-logo-icon.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Bootstrap</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/css-3.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">CSS3 Animation</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/html.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">HTML</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/color-selection.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Color Schemes</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/w3c-validator.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">W3C Validation</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/social.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">jQuery</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/google-fonts.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Google Font</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/devices.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Fully Responsive</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/cross-browser.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Cross Browser</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/documentation.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Well Documentation</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/speedometer.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Speed Optimized</p>
-												</div>
-											</div>
-											<div class="col-lg-3 col-md-4 col-sm-6">
-												<div class="feature-box">
-													<div class="feature-image">
-														<img
-															src="assets/image/feature/technical-support.png"
-															alt="feature-image"
-														/>
-													</div>
-													<p class="feature-name">Technical support</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--=============== [ File Structure ] ===============-->
-						<div class="gx-block" id="file_structure">
-							<div class="gx-card gx-page-block">
-								<div class="gx-card-header">
-									<p class="second-main-title">File Structure</p>
-									<div class="header-tools">
-										<a href="#" class="gx-full-card"
-											><i class="ri-fullscreen-fill"></i
-										></a>
-									</div>
-								</div>
-								<div class="gx-card-content">
-									<div class="file-structure">
-										<ul class="gx-main-structure">
+										<ul class="feature-list">
 											<li>
-												<a href="javascript:void(0)" class="gx-struct-drop">
-													<i class="ri-arrow-up-s-line"></i>
-													<i class="ri-folder-open-line"></i>
-													assets</a
-												>
-												<ul class="gx-sub">
-													<li>
-														<a
-															href="javascript:void(0)"
-															class="gx-struct-drop-under"
-														>
-															<i class="ri-arrow-up-s-line"></i>
-															<i class="ri-folder-4-line"></i>
-															CSS</a
-														>
-														<ul class="gx-sub-under">
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	vendor</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		dark.css
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		dark.css
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		dark.css
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		dark.css
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																dark.css
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																style.css
-															</li>
-														</ul>
-													</li>
-												</ul>
-												<ul class="gx-sub">
-													<li>
-														<a
-															href="javascript:void(0)"
-															class="gx-struct-drop-under"
-														>
-															<i class="ri-arrow-up-s-line"></i>
-															<i class="ri-folder-4-line"></i>
-															Fonts</a
-														>
-														<ul class="gx-sub-under">
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																Icon
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																nunito
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																poppins
-															</li>
-														</ul>
-													</li>
-												</ul>
-												<ul class="gx-sub">
-													<li>
-														<a
-															href="javascript:void(0)"
-															class="gx-struct-drop-under"
-														>
-															<i class="ri-arrow-up-s-line"></i>
-															<i class="ri-folder-4-line"></i>
-															Img</a
-														>
-														<ul class="gx-sub-under">
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	Favicon</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-image-fill"></i>
-																		Favicon.ico
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		Favicon.png
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	Features</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		1.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		2.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		3.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		4.png
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	Logo</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		Logo.png
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	Sidebar</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		1.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		2.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		3.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		4.png
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	Tools</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		bg-0.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		bg-1.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		bg-2.png
-																	</li>
-																	<li>
-																		<i class="ri-image-2-line"></i>
-																		bg-3.png
-																	</li>
-																</ul>
-															</li>
-														</ul>
-													</li>
-												</ul>
-												<ul class="gx-sub">
-													<li>
-														<a
-															href="javascript:void(0)"
-															class="gx-struct-drop-under"
-														>
-															<i class="ri-arrow-up-s-line"></i>
-															<i class="ri-folder-4-line"></i>
-															js</a
-														>
-														<ul class="gx-sub-under">
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	vendor</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		bootstrap.js
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		jquery-3.6.4.min.js
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																main.js
-															</li>
-														</ul>
-													</li>
-												</ul>
-												<ul class="gx-sub">
-													<li>
-														<a
-															href="javascript:void(0)"
-															class="gx-struct-drop-under"
-														>
-															<i class="ri-arrow-up-s-line"></i>
-															<i class="ri-folder-4-line"></i>
-															scss</a
-														>
-														<ul class="gx-sub-under">
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	base</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_typography.scss
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	components</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_breadcrumb.scss
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_common.scss
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_sidebar.scss
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_tools-sidebar.scss
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	layouts</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_cards.scss
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<a
-																	href="javascript:void(0)"
-																	class="gx-struct-drop-back"
-																>
-																	<i class="ri-arrow-up-s-line"></i>
-																	<i class="ri-folder-4-line"></i>
-																	utilities</a
-																>
-																<ul class="gx-sub-under-under">
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_mixins.scss
-																	</li>
-																	<li>
-																		<i class="ri-file-list-2-line"></i>
-																		_variables.scss
-																	</li>
-																</ul>
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																dark.scss
-															</li>
-															<li>
-																<i class="ri-file-list-2-line"></i>
-																style.scss
-															</li>
-														</ul>
-													</li>
-												</ul>
+												<strong>PCI-DSS Compliant:</strong> Industry-standard
+												security for handling payments.
 											</li>
 											<li>
-												<a href="javascript:void(0)">
-													<i class="ri-file-text-line"></i>
-													index.html</a
-												>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--=============== [ Starter Page ] ===============-->
-						<div class="gx-block" id="file_starter">
-							<div class="gx-card gx-page-block">
-								<div class="gx-card-header">
-									<p class="second-main-title">Starter Page</p>
-									<div class="header-tools">
-										<a href="#" class="gx-full-card"
-											><i class="ri-fullscreen-fill"></i
-										></a>
-									</div>
-								</div>
-								<div class="gx-card-content">
-									<div class="file-starter">
-										<pre class="language-markup" tabindex="0">
-                                            <code class="language-markup"> 
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-<span class="color">&lt;!-- All your metas will behere --&gt;</span>
-&lt;meta charset="UTF-8"&gt;
-&lt;meta name="viewport"content="width=device-width, initial-scale=1.0"&gt;
-&lt;head&gt;
-<span class="color">&lt;!-- Your Stylesheets,Title --&gt;</span>
-...
-&lt;/head&gt;
-&lt;body&gt;
-<span class="color">&lt;!-- Page screen Start --gt;</span>
-<span class="color">&lt;!-- Cursor animationsection --&gt;</span>
-&lt;div id="cursor" class="cursor""&gt;
-........
-&lt;/div&gt;
-<span class="color">&lt;!-- The Preloader LoaderSection --&gt;</span>
-&lt;div class="loader-mask"&gt;
-........
-&lt;/div&gt;
-<span class="color">&lt;!-- Header section Start--&gt;</span>
-&lt;div id="header-main" data-header&gt;
-...
-&lt;/div&gt;
-&lt;nav class="main-header-menu"&gt;
-...
-&lt;/nav&gt;
-<span class="color">&lt;!-- Hero section Start --&gt;</span>
-&lt;div class="hero" id="hero"&gt;
-&lt;div class="container "&gt;
-&lt;nav class="main-menu"&gt;
-...
-&lt;/nav&gt;
-&lt;div class="main-hero animate-section"&gt;
-&lt;div class="education-exper"&gt;
-&lt;div class="row menu-resume"&gt;
-...
-&lt;/div&gt;
-&lt;div class="skill-set"&gt;
-...
-&lt;/div&gt;
-&lt;div class="design-exper"&gt;
-...
-&lt;/div&gt;
-&lt;div class="skillsets overflow-hidden"&gt;
-...
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-<span class="color">&lt;!-- Footer section Start--&gt;</span>
-&lt;footer class="footer animate-section"&gt;
-...
-&lt;/footer&gt;
-<span class="color">&lt;!-- Page screen End --&gt;</span>
-<span class="color">&lt;!-- Your All Scripts willbe here --&gt;</span>
-...
-&lt;/body&gt;
-&lt;/html&gt;
-                                            </code>
-                                        </pre>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--=============== [ Customization ] ===============-->
-						<div class="gx-block" id="customization">
-							<div class="gx-card gx-page-block">
-								<div class="gx-card-header">
-									<p class="second-main-title">Customization</p>
-									<div class="header-tools">
-										<a href="#" class="gx-full-card"
-											><i class="ri-fullscreen-fill"></i
-										></a>
-									</div>
-								</div>
-								<div class="gx-card-content">
-									<div class="file-customization">
-										<ul>
-											<li>
-												<strong>Navigation Bar:</strong>
-												The template usually includes a navigation bar at the
-												right sidebar, allowing users to jump to different
-												sections of the documentation quickly. This helps users
-												find specific information without scrolling through the
-												entire page.
+												<strong>REST &amp; JS SDKs:</strong> Easy-to-use APIs
+												and libraries for smooth integration.
 											</li>
 											<li>
-												<strong>Introduction:</strong>
-												This section provides an overview of the template or
-												project, explaining its purpose, key features, and the
-												problems it aims to solve. It helps users understand the
-												context of the documentation and what they can expect
-												from the template.
+												<strong>Global Payments:</strong> Accept payments in
+												multiple currencies across countries.
 											</li>
 											<li>
-												<strong>Installation:</strong>
-												The installation section guides users through the
-												process of setting up the template or integrating it
-												into their projects. It may include code snippets,
-												terminal commands, or step-by-step instructions for
-												various platforms.
+												<strong>Fraud Detection:</strong> Built-in fraud
+												protection with AI-powered risk checks.
 											</li>
 											<li>
-												<strong>Usage:</strong>
-												In this section, users learn how to use the template
-												effectively. It typically includes code examples,
-												explanations of important functions, and demonstrations
-												of how to achieve specific tasks.
+												<strong>Merchant Dashboard:</strong> Real-time analytics
+												and transaction management.
 											</li>
 											<li>
-												<strong>Components:</strong>
-												For template libraries or frameworks, this section
-												outlines the various components and modules available
-												and describes their functionalities. It helps users
-												understand the building blocks of the template.
-											</li>
-											<li>
-												<strong>License:</strong>
-												This section specifies the template's licensing terms
-												and conditions. It ensures users are aware of how they
-												can use, modify the template legally. and not for
-												distribute or resale.
-											</li>
-											<li>
-												<strong>Additional Resources:</strong>
-												Some templates include a section for additional
-												resources, such as links to tutorials, community forums,
-												or support channels. It encourages users to explore more
-												about the template and engage with the community.
-											</li>
-											<li>
-												<strong>Styling and Responsiveness:</strong>
-												The template often incorporates CSS styles to ensure the
-												documentation is visually appealing and easy to read. It
-												may also use responsive design to adapt to different
-												screen sizes and devices.
+												<strong>24/7 Support:</strong> Dedicated technical
+												support whenever you need help.
 											</li>
 										</ul>
 									</div>
