@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Transactworld Docs</title>
+		<link
+			rel="shortcut icon"
+			href="../assets/image/header/favicon.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+		/>
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../assets/css/style.css" />
+		<link rel="stylesheet" href="../assets/css/prism.css" />
+		<link rel="stylesheet" href="../assets/css/media.css" />
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const baseUrl = window.location.origin;
+				const endpoint = "/transactionService/v1/transactions";
+				document.getElementById("endpoint-url").textContent =
+					baseUrl + endpoint;
+
+				document.getElementById(
+					"encryptionrequest-transactions"
+				).textContent = `public static String encrypt(String plaintext, String key) throws Exception {
+    SecureRandom secureRandom = new SecureRandom();
+    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+
+    byte[] iv = new byte[cipher.getBlockSize()];
+    secureRandom.nextBytes(iv);
+    IvParameterSpec ivSpec = new IvParameterSpec(iv);
+
+    byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
+    byte[] adjustedKeyBytes = new byte[16];
+	System.arraycopy(keyBytes, 0, adjustedKeyBytes, 0, Math.min(keyBytes.length, adjustedKeyBytes.length));
+    SecretKeySpec secretKey = new SecretKeySpec(adjustedKeyBytes, ENCRYPTION_ALGORITHM);
+
+    cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec);
+
+    byte[] encrypted = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
+    byte[] result = new byte[iv.length + encrypted.length];
+    System.arraycopy(iv, 0, result, 0, iv.length);
+    System.arraycopy(encrypted, 0, result, iv.length, encrypted.length);
+
+    return Base64.getEncoder().encodeToString(result);
+}
+			  `;
+			});
+
+			document.addEventListener("DOMContentLoaded", function () {
+				document.getElementById(
+					"encryptionrequest-transactions-token"
+				).textContent = `{
+"merchantId": "12345",
+"encData":
+"eAf7dyH1INuoU8ixWhymBZChTuCwu+uKpMhAdtNdi42e8z/xmling77DL3hiwsiRbtoquhuBBiGRyu/EcpJY/coG7/nOXvF8rod4WqS6MFifsV79jq6Mwg1ogWG2pXzXgc5B8o0t7KlTkZBATf/iZSP3eZXj+IyxvfAkgbgu0BlOx3b++B6tRbblpOEPiifr22ZAn+yjd7oT2rVvkbrfpBCpRVSVrVQzWonFygdqerfk7YdP8uiNygwQQYnlmujDZvOUWQG0DU3VL764i82lsSm8MnUIcwv1CIJv81ZXeD0n/r8EzvXC2bf9QUd9RW7aEBfDLUQIZhCHlnNIB33MDN6y8Mfh54FQ1odn16CWObszVcwIBMU104g+8a24CEOQxDiQq+vCNovWwEvFbzLOCRBAgplTi9vFYfzRAmayXeL5E5M3D41o6PEXm7avXbRCpohSgEezAwu7N0bailHOcUxGl297zMMv9jAe1ThDtT12P6kQcOxRKbkNOY/OisgFL/6qhjL8D3sTZrx393E5zTXJgGZS+1e9mB845buwN/zDSIZxMrmxKZ610fu3dqap0mhuks5mOvQYzYthiI1AruQ363KONhXc/jLmJCQ3MDgTaEw8rtIK2zeAp0/Xz72ik0MMDR62+dX/FvI5oFqqQj21LooeHP60rfyUKR9gYJRKROiRE3mgBFSaSZjqo3IQCFr4H3+eDaPIJRIySY3QF77BZOpf5xQ8f0iduHHzAK/gRbL14Y//DhCfe+wJTlJTHKRrZL3govarKLVB1d1DBM7Ri0f5IzCziaPb7UXBx5zP0R1hWN+z3i5BzOO7aHkxwCO+F+RBpaCMn0zlor/BJaKbbkU9jXi0dgE2VSfoZViQlzWJJTrp7Mhnb1oR9XQbrTW5K8f6WBpq9xIAjMmxVzGz2+NXIKzNf3n6L5Mc2sSNZEbDZlp6ZFbG4XVLsId6LkjEDJIBJKwB2Xufz1IVT5LdsgDW85cAqtfsjN8LvktDOVl5tzJofj0MkDi/urvkY1Hu5iguPq4ZswYUWUccRLwcIi2T8s8dDoF515P4t7xzumJH1hC3UMjWMd7KLofecLFgNKXcLcfD4NPFTHvWm5+LFiOj5ZU6chK5EFH4N7Ta5XZZ/xGarAsQMePfxhrEkGVGc7qf3G2PpqsSKauMdKwGQ5QXQNolCiLW7pkReiy+JlvW+KEMVe4Jw6vSuH7RdCxOKdixIUJP2RUZ1mmCHBZ+uF0h0vPaZhgX8vpbZy4iYhIGCA6PF+p4S4/gePerAAD59Orh7ui7IDFbudAckGxBQUqIjwYY1mVWTzqn2txriMH//zRR+fvdSk06LdFzVriqwjltZoGf5mQpfZCo+EJjakUv2dYQweE03XbZvnrIDHiMo3+B6e0tEdiUoovRx/SigJyTAdfdiry0qKei3VD7BtYR86HGlKgz7FiBWJNfrDpGwzn5Jj40GvJdLPliizVYTA6lc4J1yxDXAhdX1U02j0qaK3ERj9MUyFKHzQcXCMddUFvIXCWXR43jHquRozDufuFqPaUikZztijTRtDt8lC8zC1U2BJx32rmt/2FQUiLcCY6/U7j8abzPd41kccDVt6pEO0V5yFOP8Leco9fnMgPp8LP5iehiDF5pxvRZf9CXSJf6t8WjQpLtNDGb8WQ4HhY95xMiJtdBquWD9XdMqsNFnLfbsqsBkayGQ9WRPwo0Ibz99iIId30vNco3nMBzeYOQCTnRb5nkkb5Yfoapn4svCFpL/+o5Gv2kvV8qSBxBcj4NxM3DchCYa2Eq"
+}
+`;
+			});
+		</script>
+	</head>
+	<body>
+		<!--========================= [ Loader Sppier Design Start ] =========================-->
+
+		<div class="loader-mask">
+			<div class="loader">
+				<div class="dot-spinner">
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+				</div>
+			</div>
+		</div>
+		<!--========================= [ Loader Sppier Design Exit ] =========================-->
+		<!--========================= [ Header Section Start ] =========================-->
+		<header class="header" id="header">
+			<div class="header__container">
+				<div class="toggle-menu-doct">
+					<!-- <button class="header__toggle" id="header-toggle">
+						<i class="ri-menu-line"></i>
+					</button> -->
+					<!-- <div class="form-doct">
+						<input type="search" placeholder="Search..." />
+						<a href="javascript:void(0)" class="search-btn">
+							<i class="ri-search-line"></i>
+						</a>
+					</div> -->
+				</div>
+				<div class="toggle-menu-doct">
+					<!-- <a href="javascript:void(0)" class="navbar-link sidebar__actions">
+						<div class="link-nav">
+							<i
+								class="ri-moon-clear-fill sidebar__link sidebar__theme"
+								id="theme-button"
+							>
+							</i>
+						</div>
+					</a> -->
+					<a
+						href="https://www.transactworld.com/"
+						target="_blank"
+						class="header__logo button-buy"
+					>
+						Visit Website
+					</a>
+				</div>
+			</div>
+		</header>
+		<!--========================= [ Header Section Exit ] =========================-->
+		<!--========================= [ Sidebar Design Section Start ] =========================-->
+		<nav class="sidebar" id="sidebar">
+			<div class="left-sidebar">
+				<div class="main-logo">
+					<a href="../index.html" class="fully_logo">
+						<img
+							src="../assets/image/header/Logo.png"
+							alt="main_Logo"
+							class="img-fluid"
+						/>
+					</a>
+					<a href="index.html" class="favicon_logo">
+						<img
+							src="../assets/image/header/favicon.png"
+							class="img-fluid"
+							alt="favicon_logo"
+						/>
+					</a>
+				</div>
+				<ul class="navbar-second">
+					<li class="navbar-left-li">
+						<a href="../index.html" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-star-smile-line"></i>
+								<p class="getting-line">Getting Started</p>
+							</div>
+						</a>
+					</li>
+					<li class="navbar-left-li">
+						<a href="javascript:void(0)" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-dashboard-2-line"></i>
+								<p class="getting-line">Direct Transaction API</p>
+							</div>
+						</a>
+						<ul class="dropdown-data always-open">
+							<li>
+								<a href="/transactions/generatetoken.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Generate Token</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/transactions.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Transactions</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/inquiry.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Inquiry</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/refund.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Refund</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="navbar-left-li">
+						<a href="/responsecodes-notification.html" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-file-text-line"></i>
+								<p class="getting-line">
+									Response Codes & Notification Response
+								</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!--========================= [ Sidebar Design Section Exit ] =========================-->
+		<!-- main content -->
+		<main class="main container-data" id="main">
+			<div class="container-fluid right-soft">
+				<div class="page-title">
+					<p class="main-title-right">Transaction Initiation</p>
+					<ul class="right-top-ul">
+						<li class="right-top-li">
+							<a href="index.html">Transactworld</a>
+						</li>
+						<li class="right-top-li">Transaction Initiation</li>
+					</ul>
+				</div>
+				<div class="row section">
+					<div class="col-xl-3 col-4 gx-topic">
+						<div class="last-right-card topic-sidebar">
+							<div class="card-header-topic">
+								<p class="hx-card-title">Topics</p>
+							</div>
+							<div class="hx-card-content hx-topic-list">
+								<nav>
+									<ul class="topic-list">
+										<li>
+											<a href="#introduction" class="hx-topic active"
+												>Introduction</a
+											>
+										</li>
+										<li>
+											<a href="#request_parameter" class="hx-topic"
+												>Request Parameters</a
+											>
+										</li>
+										<li>
+											<a href="#encryption_code_snippet" class="hx-topic"
+												>Encryption Code Snippet</a
+											>
+										</li>
+										<li>
+											<a href="#encryption_description" class="hx-topic"
+												>Encryption Description</a
+											>
+										</li>
+										<li>
+											<a href="#request_body" class="hx-topic">Request Body</a>
+										</li>
+										<li>
+											<a href="#response_body" class="hx-topic"
+												>Response Body</a
+											>
+										</li>
+
+										<li>
+											<a href="#integration_notes" class="hx-topic"
+												>Integration Notes</a
+											>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-9 col-lg-12 col-md-12">
+						<!--=============== [ Introduction ] ===============-->
+						<div class="gx-block" id="introduction">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Introduction</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="intero">
+										<ul class="auth-detail">
+											<li class="auth-detail-li end-point-customize">
+												<strong>Endpoint:</strong>
+												<span class="http-tag">POST</span>
+												<code class="endpoint-url" id="endpoint-url"></code>
+											</li>
+											<li class="auth-detail-li">
+												<strong>Content Type :</strong>
+												application/json
+											</li>
+											<li class="auth-detail-li">
+												<strong>Description :</strong>
+												Initiates a payment transaction with comprehensive
+												customer details, shipping information, and payment
+												method configuration. Supports multiple payment types
+												including credit cards, digital wallets, and UPI
+												transactions.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Request Parameters ] ===============-->
+						<div class="gx-block" id="request_parameter">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Request Parameters</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="intero">
+										<div class="table-wrapper">
+											<table class="doc-table">
+												<thead>
+													<tr>
+														<th>Parameter</th>
+														<th>Type</th>
+														<th>Required</th>
+														<th>Description</th>
+														<th>Example</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><code>memberId</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Unique identifier for the merchant member
+														</td>
+														<td class="doc-example">
+															Accept only numeric value (e.g., 12345)
+														</td>
+													</tr>
+													<tr>
+														<td><code>orderId</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Unique order identifier from merchant system
+														</td>
+														<td class="doc-example">
+															Accept alphanumeric value (e.g., ORD12345)
+														</td>
+													</tr>
+													<tr>
+														<td><code>channelId</code></td>
+														<td>string</td>
+														<td>Conditional</td>
+														<td class="doc-desc">
+															Channel identifier for the transaction source
+														</td>
+														<td class="doc-example">
+															Accept only numeric value (e.g., 1234)
+														</td>
+													</tr>
+
+													<!-- Customer Details -->
+													<tr>
+														<td><code>customerDetails.customerName</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Full name of the customer</td>
+														<td class="doc-example">
+															Accept alphabetic value (e.g., devest)
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<code>customerDetails.customerFirstName</code>
+														</td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Customer’s first name</td>
+														<td class="doc-example">
+															Accept alphabetic value (e.g., dev)
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<code>customerDetails.customerLastName</code>
+														</td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Customer’s last name</td>
+														<td class="doc-example">
+															Accept alphabetic value (e.g., test)
+														</td>
+													</tr>
+													<tr>
+														<td><code>customerDetails.customerDOB</code></td>
+														<td>string (DDMMYYYY)</td>
+														<td>Optional</td>
+														<td class="doc-desc">
+															Customer’s date of birth in DDMMYYYY format
+														</td>
+														<td class="doc-example">
+															Accept numeric date (e.g., 01012000)
+														</td>
+													</tr>
+													<tr>
+														<td><code>customerDetails.customerPhone</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Customer’s phone number</td>
+														<td class="doc-example">
+															Accept only numeric value (e.g., 9874532150)
+														</td>
+													</tr>
+													<tr>
+														<td><code>customerDetails.customerEmail</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Customer’s email address</td>
+														<td class="doc-example">
+															Accept valid email (e.g., devtest@gmail.com)
+														</td>
+													</tr>
+													<tr>
+														<td><code>customerDetails.customerCC</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Customer’s country calling code
+														</td>
+														<td class="doc-example">
+															Accept numeric value (e.g., 91)
+														</td>
+													</tr>
+
+													<!-- Shipping Details -->
+													<tr>
+														<td><code>shippingDetails.shippingName</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">
+															Recipient’s name for shipping
+														</td>
+														<td class="doc-example">
+															Accept alphabetic value (e.g., dev test)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingStreet</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">
+															Street address for shipping
+														</td>
+														<td class="doc-example">
+															Accept alphanumeric value (e.g., street 1)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingCity</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">City for shipping</td>
+														<td class="doc-example">
+															Accept alphabetic value (e.g., mumbai)
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<code>shippingDetails.shippingCountry</code>
+														</td>
+														<td>string (ISO3)</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">
+															Country code in ISO 3-letter format
+														</td>
+														<td class="doc-example">
+															Accept ISO code (e.g., IND)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingZip</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">Postal/ZIP code</td>
+														<td class="doc-example">
+															Accept alphanumeric value (e.g., 400063)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingPhone</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">Shipping contact phone</td>
+														<td class="doc-example">
+															Accept numeric value (e.g., 9874563210)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingEmail</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">Shipping contact email</td>
+														<td class="doc-example">
+															Accept valid email (e.g., devtest@gmail.com)
+														</td>
+													</tr>
+													<tr>
+														<td><code>shippingDetails.shippingCC</code></td>
+														<td>string</td>
+														<td>Yes (if provided)</td>
+														<td class="doc-desc">
+															Shipping country calling code
+														</td>
+														<td class="doc-example">
+															Accept numeric value (e.g., 91)
+														</td>
+													</tr>
+
+													<!-- Payment Details -->
+													<tr>
+														<td><code>payment.paymentMethod</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">Payment method type</td>
+														<td class="doc-example">
+															CREDIT_CARD / WALLET / UPI
+														</td>
+													</tr>
+													<tr>
+														<td><code>payment.paymentBrand</code></td>
+														<td>string</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Brand of the payment method (card brand, wallet,
+															UPI app)
+														</td>
+														<td class="doc-example">VISA / GooglePay</td>
+													</tr>
+													<tr>
+														<td><code>payment.amount</code></td>
+														<td>string (decimal)</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Transaction amount in decimal format
+														</td>
+														<td class="doc-example">
+															Accept decimal value (e.g., 10.00)
+														</td>
+													</tr>
+													<tr>
+														<td><code>payment.currency</code></td>
+														<td>string (ISO)</td>
+														<td>Yes</td>
+														<td class="doc-desc">ISO 3-letter currency code</td>
+														<td class="doc-example">INR</td>
+													</tr>
+
+													<!-- Card -->
+													<tr>
+														<td><code>payment.card.pan</code></td>
+														<td>string</td>
+														<td>Conditional</td>
+														<td class="doc-desc">
+															Primary Account Number (card number)
+														</td>
+														<td class="doc-example">
+															16-digit numeric (e.g., 4444333322221111)
+														</td>
+													</tr>
+													<tr>
+														<td><code>payment.card.expiryMonth</code></td>
+														<td>string (MM)</td>
+														<td>Conditional</td>
+														<td class="doc-desc">Card expiry month</td>
+														<td class="doc-example">12</td>
+													</tr>
+													<tr>
+														<td><code>payment.card.expiryYear</code></td>
+														<td>string (YYYY)</td>
+														<td>Conditional</td>
+														<td class="doc-desc">Card expiry year</td>
+														<td class="doc-example">2025</td>
+													</tr>
+													<tr>
+														<td><code>payment.card.cvv</code></td>
+														<td>string</td>
+														<td>Conditional</td>
+														<td class="doc-desc">Card CVV/CVC security code</td>
+														<td class="doc-example">
+															3 or 4 digits (e.g., 111, 1234)
+														</td>
+													</tr>
+
+													<!-- Wallet -->
+													<tr>
+														<td><code>wallet.username</code></td>
+														<td>string</td>
+														<td>Conditional (if WALLET)</td>
+														<td class="doc-desc">Wallet account username</td>
+														<td class="doc-example">dev@123</td>
+													</tr>
+													<tr>
+														<td><code>wallet.password</code></td>
+														<td>string</td>
+														<td>Conditional (if WALLET)</td>
+														<td class="doc-desc">Wallet account password</td>
+														<td class="doc-example">asdfrgyh</td>
+													</tr>
+													<tr>
+														<td><code>wallet.walletId</code></td>
+														<td>string</td>
+														<td>Conditional (if WALLET)</td>
+														<td class="doc-desc">Unique wallet identifier</td>
+														<td class="doc-example">asd1233</td>
+													</tr>
+
+													<!-- UPI -->
+													<tr>
+														<td><code>vpaAddress</code></td>
+														<td>string</td>
+														<td>Conditional (if UPI)</td>
+														<td class="doc-desc">
+															Virtual Payment Address for UPI transactions
+														</td>
+														<td class="doc-example">john.dave@okhdfcbank</td>
+													</tr>
+
+													<!-- Redirect & Notification -->
+													<tr>
+														<td><code>redirectUrl</code></td>
+														<td>string (URL)</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															URL to redirect user after payment completion
+														</td>
+														<td class="doc-example">
+															https://www.yourRedirectURL.com
+														</td>
+													</tr>
+													<tr>
+														<td><code>notificationUrl</code></td>
+														<td>string (URL)</td>
+														<td>Optional</td>
+														<td class="doc-desc">
+															Webhook URL for payment status notifications
+														</td>
+														<td class="doc-example">
+															https://sandbox.example.com/transaction/PGBackEndServlet
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Encryption Code Snippet ] ===============-->
+						<div class="gx-block" id="encryption_code_snippet">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Encryption Code Snippet</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<pre class="output" id="encryptionrequest-transactions"></pre>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Encyption Description ] ===============-->
+						<div class="gx-block" id="encryption_description">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Encyption Description</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="file-customization">
+										<ul>
+											<li>
+												Encrypts a given plaintext string using AES encryption
+												(CBC mode with PKCS5 padding). The secret key is
+												required to generate a consistent encrypted result. The
+												initialization vector (IV) is randomly generated for
+												each encryption and prepended to the output.
+											</li>
+											<li>This encryption method uses:</li>
+											<li>
+												<strong>Algorithm:</strong>
+												AES
+											</li>
+											<li>
+												<strong>Mode:</strong>
+												CBC (Cipher Block Chaining)
+											</li>
+											<li>
+												<strong>Padding:</strong>
+												PKCS5Padding
+											</li>
+											<li>
+												<strong>IV:</strong>
+												Randomly generated for each encryption
+											</li>
+											<li>
+												<strong>Key:</strong>
+												128-bit (truncated/padded from input string)
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Request Body ] ===============-->
+						<div class="gx-block" id="request_body">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Request Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<p class="second-main-title" style="font-size: 18px">
+										Before Encryption Request Body
+									</p>
+									<div class="form-inline">
+										<div class="paymentmethod">
+											<label for="paymentMethod">Payment Method:</label>
+											<select id="paymentMethod">
+												<option value="CREDIT_CARD">CREDIT_CARD</option>
+												<option value="DEBIT_CARD">DEBIT_CARD</option>
+												<option value="WALLET">WALLET</option>
+												<option value="UPI">UPI</option>
+												<option value="NET_BANKING">NET_BANKING</option>
+											</select>
+										</div>
+										<div class="currency">
+											<label for="currency">Currency:</label>
+											<select id="currency">
+												<option value="INR">INR - Indian Rupee</option>
+												<option value="USD">USD - US Dollar</option>
+												<option value="EUR">EUR - Euro</option>
+												<option value="GBP">GBP - British Pound</option>
+											</select>
+										</div>
+									</div>
+									<div class="output" id="jsonOutput"></div>
+									<p
+										class="second-main-title"
+										style="font-size: 18px; margin: 40px 0px"
+									>
+										After Encryption Request Body
+									</p>
+									<div
+										class="output"
+										id="encryptionrequest-transactions-token"
+									></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 3Dsecure pending Response Body -->
+						<div class="gx-block" id="response_body">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">
+										3Dsecure pending Response Body
+									</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="output" id="responsejsonOutput-3ds"></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Success Response Body -->
+						<div class="gx-block" id="response_body_success">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Success Response Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="output" id="responsejsonOutput-success"></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Failed Response Body -->
+						<div class="gx-block" id="response_body_failed">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Failed Response Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="output" id="responsejsonOutput-failed"></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Pending Response Body -->
+						<div class="gx-block" id="response_body_pending">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Pending Response Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="output" id="responsejsonOutput-pending"></div>
+								</div>
+							</div>
+						</div>
+
+						<!--=============== [ Integration Notes ] ===============-->
+						<div class="gx-block" id="integration_notes">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Integration Notes</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="file-customization">
+										<ul>
+											<li>
+												<strong>Authentication Required:</strong>
+												All API requests must include proper authentication
+												headers.
+											</li>
+											<li>
+												<strong>Webhook Notifications:</strong>
+												Configure `notificationUrl` to receive real-time
+												transaction updates.
+											</li>
+											<li>
+												<strong>Redirect Handling:</strong>
+												Implement proper redirect URL handling for payment
+												completion flow.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="gx-card-overlay"></div> -->
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--========================= [ jQuery File ] =========================-->
+		<script src="../assets/js/jquery.min.js"></script>
+		<!--========================= [ Bootstrap File ] =========================-->
+		<script src="../assets/js/bootstrap.bundle.min.js"></script>
+		<!--========================= [ prism File ] =========================-->
+		<script src="../assets/js/prism.js"></script>
+		<script src="../assets/js/prism.min.js"></script>
+		<!--========================= [ Main Javascript File ] =========================-->
+		<script src="../assets/js/main.js"></script>
+	</body>
+</html>
+<!--=============== HEADER ===============-->
+<!--=============== SIDEBAR ===============-->
+<!--=============== MAIN ===============-->

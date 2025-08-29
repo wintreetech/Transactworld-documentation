@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Transactworld Docs</title>
+		<link
+			rel="shortcut icon"
+			href="../assets/image/header/favicon.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+		/>
+		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../assets/css/style.css" />
+		<link rel="stylesheet" href="../assets/css/prism.css" />
+		<link rel="stylesheet" href="../assets/css/media.css" />
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const paramSelect = document.getElementById("paramSelect");
+				const paramTableBody = document.getElementById("paramTableBody");
+				const jsonPre = document.getElementById("jsonrequest");
+				const curlPre = document.getElementById("curlrequest");
+				const responsePre = document.getElementById(
+					"jsonresponse-gettransactionsbytsid"
+				);
+
+				// Full original response
+				const fullResponse = {
+					transactionDetails: {
+						tsid: 217,
+						uuid: "uidc4556ee4bcee34a4a79e7b77c21c56fb",
+						merchantId: 12346,
+						orderId: "12312145",
+						amount: 10.0,
+						captureAmount: 0.0,
+						settledAmount: 0.0,
+						refundAmount: 0.0,
+						chargebackAmount: 0.0,
+						currency: "USD",
+						channelId: 1240,
+						customerFirstName: "john",
+						customerLastName: "doe",
+						cardHolderName: "john",
+						customerDOB: "01012000",
+						customerPhone: "9874532150",
+						cc: "91",
+						customerEmail: "devtest@gmail.com",
+						customerStreet: "street 1",
+						customerCity: "mumbai",
+						customerZip: "400063",
+						customerCountry: "IND",
+						bin: "535456",
+						lastFour: "7182",
+						customerId: "null",
+						redirectUrl: "https://www.google.com/",
+						notificationUrl:
+							"https://sandbox.example.com/transaction/PGBackEndServlet",
+						arn: "",
+						rrn: "",
+						transactionMode: "",
+						status: "pending",
+						remark: "Transaction Pending",
+						timestamp: 1753106729,
+						datetime: "2025-07-21 19:35:29",
+						paymentBrand: "MASTER",
+						paymentMode: "CREDIT_CARD",
+					},
+				};
+
+				function updateAll() {
+					const selected = paramSelect.value;
+
+					// Show/Hide table rows
+					paramTableBody.querySelectorAll("tr").forEach((row) => {
+						row.style.display = row.dataset.param === selected ? "" : "none";
+					});
+
+					// Update Request JSON
+					let requestObj = {};
+					requestObj[selected] = selected === "tsid" ? 32 : "12312145";
+					jsonPre.textContent = JSON.stringify(requestObj, null, 4);
+
+					// Update cURL
+					curlPre.textContent =
+						"curl --location 'http://localhost:8080/transactionService/transactionDetails/getTransactionsBy" +
+						(selected === "tsid" ? "Tsid" : "OrderId") +
+						"' \\\n--header 'Content-Type: application/json' \\\n--data '" +
+						JSON.stringify(requestObj, null, 4) +
+						"'";
+
+					// Update Response JSON (full)
+					let responseObj = JSON.parse(JSON.stringify(fullResponse)); // deep clone
+					if (selected === "tsid") {
+						responseObj.transactionDetails.tsid = 217;
+					} else {
+						responseObj.transactionDetails.orderId = "12312145";
+					}
+					responsePre.textContent = JSON.stringify(responseObj, null, 4);
+				}
+
+				paramSelect.addEventListener("change", updateAll);
+				updateAll();
+
+				const baseUrl = window.location.origin;
+				const endpoint = "/transactionService/v1/inquiry";
+				document.getElementById("endpoint-url").textContent =
+					baseUrl + endpoint;
+			});
+		</script>
+	</head>
+	<body>
+		<!--========================= [ Loader Sppier Design Start ] =========================-->
+		<div class="loader-mask">
+			<div class="loader">
+				<div class="dot-spinner">
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+					<div class="dot-spinner__dot"></div>
+				</div>
+			</div>
+		</div>
+		<!--========================= [ Loader Sppier Design Exit ] =========================-->
+		<!--========================= [ Header Section Start ] =========================-->
+		<header class="header" id="header">
+			<div class="header__container">
+				<div class="toggle-menu-doct">
+					<!-- <button class="header__toggle" id="header-toggle">
+						<i class="ri-menu-line"></i>
+					</button> -->
+					<!-- <div class="form-doct">
+						<input type="search" placeholder="Search..." />
+						<a href="javascript:void(0)" class="search-btn">
+							<i class="ri-search-line"></i>
+						</a>
+					</div> -->
+				</div>
+				<div class="toggle-menu-doct">
+					<!-- <a href="javascript:void(0)" class="navbar-link sidebar__actions">
+						<div class="link-nav">
+							<i
+								class="ri-moon-clear-fill sidebar__link sidebar__theme"
+								id="theme-button"
+							>
+							</i>
+						</div>
+					</a> -->
+					<a
+						href="https://www.transactworld.com/"
+						target="_blank"
+						class="header__logo button-buy"
+					>
+						Visit Website
+					</a>
+				</div>
+			</div>
+		</header>
+		<!--========================= [ Header Section Exit ] =========================-->
+		<!--========================= [ Sidebar Design Section Start ] =========================-->
+		<nav class="sidebar" id="sidebar">
+			<div class="left-sidebar">
+				<div class="main-logo">
+					<a href="../index.html" class="fully_logo">
+						<img
+							src="../assets/image/header/Logo.png"
+							alt="main_Logo"
+							class="img-fluid"
+						/>
+					</a>
+					<a href="index.html" class="favicon_logo">
+						<img
+							src="../assets/image/header/favicon.png"
+							class="img-fluid"
+							alt="favicon_logo"
+						/>
+					</a>
+				</div>
+				<ul class="navbar-second">
+					<li class="navbar-left-li">
+						<a href="../index.html" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-star-smile-line"></i>
+								<p class="getting-line">Getting Started</p>
+							</div>
+						</a>
+					</li>
+					<li class="navbar-left-li">
+						<a href="javascript:void(0)" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-dashboard-2-line"></i>
+								<p class="getting-line">Direct Transaction API</p>
+							</div>
+						</a>
+						<ul class="dropdown-data always-open">
+							<li>
+								<a href="/transactions/generatetoken.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Generate Token</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/transactions.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Transactions</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/inquiry.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Inquiry</p>
+								</a>
+							</li>
+							<li>
+								<a href="/transactions/refund.html" class="drop-down">
+									<span class="http-tag post">POST</span>
+									<!-- <i class="ri-record-circle-line"></i> -->
+									<p class="wrap-text">Refund</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="navbar-left-li">
+						<a href="/responsecodes-notification.html" class="navbar-link">
+							<div class="link-nav">
+								<i class="ri-file-text-line"></i>
+								<p class="getting-line">
+									Response Codes & Notification Response
+								</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!--========================= [ Sidebar Design Section Exit ] =========================-->
+		<!-- main content -->
+		<main class="main container-data" id="main">
+			<div class="container-fluid right-soft">
+				<div class="page-title">
+					<p class="main-title-right">Inquiry</p>
+					<ul class="right-top-ul">
+						<li class="right-top-li">
+							<a href="index.html">Transactworld</a>
+						</li>
+						<li class="right-top-li">Inquiry</li>
+					</ul>
+				</div>
+				<div class="row section">
+					<div class="col-xl-3 col-4 gx-topic">
+						<div class="last-right-card topic-sidebar">
+							<div class="card-header-topic">
+								<p class="hx-card-title">Topics</p>
+							</div>
+							<div class="hx-card-content hx-topic-list">
+								<nav>
+									<ul class="topic-list">
+										<li>
+											<a href="#introduction" class="hx-topic active"
+												>Introduction</a
+											>
+										</li>
+										<li>
+											<a href="#request_parameter" class="hx-topic"
+												>Request Parameters</a
+											>
+										</li>
+										<li>
+											<a href="#request_body" class="hx-topic">Request Body</a>
+										</li>
+										<li>
+											<a href="#response_body" class="hx-topic"
+												>Response Body</a
+											>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-9 col-lg-12 col-md-12">
+						<!--=============== [ Introduction ] ===============-->
+						<div class="gx-block" id="introduction">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Introduction</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="intero">
+										<ul class="auth-detail">
+											<li class="auth-detail-li end-point-customize">
+												<strong>Endpoint:</strong>
+												<span class="http-tag">POST</span>
+												<code class="endpoint-url" id="endpoint-url"></code>
+											</li>
+											<li class="auth-detail-li">
+												<strong>Content Type :</strong>
+												application/json
+											</li>
+											<li class="auth-detail-li">
+												<strong>Description :</strong>
+												Fetches the transaction details for a given Transaction
+												Session ID (TSID). This API is used to retrieve
+												information related to a specific transaction, including
+												status, amount, currency, payment method, timestamps,
+												and other metadata. This is useful for merchants,
+												support teams, or backend systems that need to view
+												transaction-related data for reconciliation, status
+												checking, or reporting.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Request Parameters ] ===============-->
+						<div class="gx-block" id="request_parameter">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Request Parameters</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<div class="intero">
+										<!-- Dropdown -->
+										<label for="paramSelect"><b>Select Parameter:</b></label>
+										<select id="paramSelect">
+											<option value="tsid" selected>TSID</option>
+											<option value="orderId">Order ID</option>
+										</select>
+
+										<div class="table-wrapper">
+											<table class="doc-table">
+												<thead>
+													<tr>
+														<th>Parameter</th>
+														<th>Type</th>
+														<th>Required</th>
+														<th>Description</th>
+														<th>Example</th>
+													</tr>
+												</thead>
+												<tbody id="paramTableBody">
+													<tr data-param="tsid">
+														<td><code>tsid</code></td>
+														<td>Number</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Transaction ID Received in Response
+														</td>
+														<td class="doc-example">32</td>
+													</tr>
+													<tr data-param="orderId" style="display: none">
+														<td><code>orderId</code></td>
+														<td>String</td>
+														<td>Yes</td>
+														<td class="doc-desc">
+															Order ID Used in Transaction
+														</td>
+														<td class="doc-example">12312145</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--=============== [ Request Body ] ===============-->
+						<div class="gx-block" id="request_body">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Request Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<!-- Radio buttons -->
+									<input type="radio" id="tab-json" name="tab" checked />
+									<input type="radio" id="tab-curl" name="tab" />
+
+									<!-- Tab Labels -->
+									<div class="tab-labels">
+										<label for="tab-json">JSON</label>
+										<label for="tab-curl">cURL</label>
+									</div>
+
+									<!-- Tab Content -->
+									<div class="tab-content">
+										<div id="content-json" class="content">
+											<pre id="jsonrequest"></pre>
+										</div>
+
+										<div id="content-curl" class="content">
+											<pre id="curlrequest"></pre>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--=============== [ Response Body ] ===============-->
+						<div class="gx-block" id="response_body">
+							<div class="gx-card gx-page-block">
+								<div class="gx-card-header">
+									<p class="second-main-title">Response Body</p>
+									<div class="header-tools">
+										<a href="#" class="gx-full-card"
+											><i class="ri-fullscreen-fill"></i
+										></a>
+									</div>
+								</div>
+								<div class="gx-card-content">
+									<pre
+										class="output"
+										id="jsonresponse-gettransactionsbytsid"
+									></pre>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div class="gx-card-overlay"></div> -->
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--========================= [ jQuery File ] =========================-->
+		<script src="../assets/js/jquery.min.js"></script>
+		<!--========================= [ Bootstrap File ] =========================-->
+		<script src="../assets/js/bootstrap.bundle.min.js"></script>
+		<!--========================= [ prism File ] =========================-->
+		<script src="../assets/js/prism.js"></script>
+		<script src="../assets/js/prism.min.js"></script>
+		<!--========================= [ Main Javascript File ] =========================-->
+		<script src="../assets/js/main.js"></script>
+	</body>
+</html>
+<!--=============== HEADER ===============-->
+<!--=============== SIDEBAR ===============-->
+<!--=============== MAIN ===============-->
