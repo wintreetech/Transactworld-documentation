@@ -1,139 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Transactworld Docs</title>
-		<link
-			rel="shortcut icon"
-			href="../assets/image/header/favicon.png"
-			type="image/x-icon"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-		/>
-		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../assets/css/style.css" />
-		<link rel="stylesheet" href="../assets/css/prism.css" />
-		<link rel="stylesheet" href="../assets/css/media.css" />
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				const notificationResponse = {
-					notificationRequest: {
-						merchantId: "1243",
-						channelId: "34377",
-						descriptor: "abc PVT",
-						orderId: "merchantorderid11212",
-						merchant_callbackUrl:
-							"https://preprod.paymentplug.com/transaction/PGBackEndServlet",
-						payment: {
-							status: "success",
-							remark: "successful",
-							transactionId: "1111111",
-							paymentMethod: "CREDIT_CARD",
-							paymentBrand: "VISA",
-							amount: "10.00",
-							currency: "INR",
-							datetime: "2024-12-30 19:18:15",
-							card: {
-								first_six: "444433",
-								last_four: "4545",
-								card_holder_name: "dev dev",
-							},
-							walletId: "4545",
-							payer_vpa: "customer@upi",
-							payee_vpa: "receiver@upi",
-							bank_name: "icici",
-							wallet_name: "googlepay",
-							rrn: "4565456545",
-							arn: "676767677",
-						},
-						customer_details: {
-							customer_name: "dev dev",
-							customer_phone: "999999999",
-							customer_email: "dev@gmail.com",
-							customer_street: "london los vagus",
-							customer_city: "menchester",
-							customer_zip: "50000",
-							customer_country: "europ",
-						},
-						refund: {
-							rfstatus: "success",
-							remark: "raised by customer",
-							refundId: "1111111",
-							rf_datetime: "2024-12-30 19:18:15",
-							paymentMethod: "CREDIT_CARD",
-							paymentBrand: "VISA",
-							amount: "10.00",
-							currency: "INR",
-						},
-						chargeback: {
-							cbstatus: "success",
-							remark: "raised by customer",
-							chargebackId: "1111111",
-							cb_datetime: "2024-12-30 19:18:15",
-							paymentMethod: "CREDIT_CARD",
-							paymentBrand: "VISA",
-							amount: "10.00",
-							currency: "INR",
-						},
-						settled: {
-							status: "paid",
-							remark: "success",
-							settledId: "1111111",
-							from_date: "2024-12-30 19:18:15",
-							to_date: "2024-12-30 19:18:15",
-							settled_amount: "10.00",
-							currency: "INR",
-						},
-					},
-				};
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transactworld Docs</title>
+    <link
+      rel="shortcut icon"
+      href="../assets/image/header/favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    />
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/prism.css" />
+    <link rel="stylesheet" href="../assets/css/media.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const notificationResponse = {
+          notificationRequest: {
+            merchantId: "1243",
+            channelId: "34377",
+            descriptor: "abc PVT",
+            orderId: "merchantorderid11212",
+            merchant_callbackUrl:
+              "https://preprod.paymentplug.com/transaction/PGBackEndServlet",
+            payment: {
+              status: "success",
+              remark: "successful",
+              transactionId: "1111111",
+              paymentMethod: "CREDIT_CARD",
+              paymentBrand: "VISA",
+              amount: "10.00",
+              currency: "INR",
+              datetime: "2024-12-30 19:18:15",
+              card: {
+                first_six: "444433",
+                last_four: "4545",
+                card_holder_name: "dev dev",
+              },
+              walletId: "4545",
+              payer_vpa: "customer@upi",
+              payee_vpa: "receiver@upi",
+              bank_name: "icici",
+              wallet_name: "googlepay",
+              rrn: "4565456545",
+              arn: "676767677",
+            },
+            customer_details: {
+              customer_name: "dev dev",
+              customer_phone: "999999999",
+              customer_email: "dev@gmail.com",
+              customer_street: "london los vagus",
+              customer_city: "menchester",
+              customer_zip: "50000",
+              customer_country: "europ",
+            },
+            refund: {
+              rfstatus: "success",
+              remark: "raised by customer",
+              refundId: "1111111",
+              rf_datetime: "2024-12-30 19:18:15",
+              paymentMethod: "CREDIT_CARD",
+              paymentBrand: "VISA",
+              amount: "10.00",
+              currency: "INR",
+            },
+            chargeback: {
+              cbstatus: "success",
+              remark: "raised by customer",
+              chargebackId: "1111111",
+              cb_datetime: "2024-12-30 19:18:15",
+              paymentMethod: "CREDIT_CARD",
+              paymentBrand: "VISA",
+              amount: "10.00",
+              currency: "INR",
+            },
+            settled: {
+              status: "paid",
+              remark: "success",
+              settledId: "1111111",
+              from_date: "2024-12-30 19:18:15",
+              to_date: "2024-12-30 19:18:15",
+              settled_amount: "10.00",
+              currency: "INR",
+            },
+          },
+        };
 
-				document.getElementById("json-notification").textContent =
-					JSON.stringify(notificationResponse, null, 4);
-			});
-		</script>
-	</head>
-	<body>
-		<!--========================= [ Loader Sppier Design Start ] =========================-->
-		<div class="loader-mask">
-			<div class="loader">
-				<div class="dot-spinner">
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-					<div class="dot-spinner__dot"></div>
-				</div>
-			</div>
-		</div>
-		<!--========================= [ Loader Sppier Design Exit ] =========================-->
-		<!--========================= [ Header Section Start ] =========================-->
-		<header class="header" id="header">
-			<div class="header__container">
-				<div class="toggle-menu-doct">
-					<!-- <button class="header__toggle" id="header-toggle">
-						<i class="ri-menu-line"></i>
-					</button> -->
-					<!-- <div class="form-doct">
+        document.getElementById("json-notification").textContent =
+          JSON.stringify(notificationResponse, null, 4);
+      });
+    </script>
+  </head>
+  <body>
+    <!--========================= [ Loader Sppier Design Start ] =========================-->
+    <div class="loader-mask">
+      <div class="loader">
+        <div class="dot-spinner">
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+          <div class="dot-spinner__dot"></div>
+        </div>
+      </div>
+    </div>
+    <!--========================= [ Loader Sppier Design Exit ] =========================-->
+    <!--========================= [ Header Section Start ] =========================-->
+    <header class="header" id="header">
+      <div class="header__container">
+        <div class="toggle-menu-doct">
+          <button class="header__toggle lg:hidden" id="header-toggle">
+            <i class="ri-menu-line"></i>
+          </button>
+          <!-- <div class="form-doct">
 						<input type="search" placeholder="Search..." />
 						<a href="javascript:void(0)" class="search-btn">
 							<i class="ri-search-line"></i>
 						</a>
 					</div> -->
-				</div>
-				<div class="toggle-menu-doct">
-					<!-- <a href="javascript:void(0)" class="navbar-link sidebar__actions">
+        </div>
+        <div class="toggle-menu-doct">
+          <!-- <a href="javascript:void(0)" class="navbar-link sidebar__actions">
 						<div class="link-nav">
 							<i
 								class="ri-moon-clear-fill sidebar__link sidebar__theme"
@@ -142,206 +143,213 @@
 							</i>
 						</div>
 					</a> -->
-					<a
-						href="https://www.transactworld.com/"
-						target="_blank"
-						class="header__logo button-buy"
-					>
-						Visit Website
-					</a>
-				</div>
-			</div>
-		</header>
-		<!--========================= [ Header Section Exit ] =========================-->
-		<!--========================= [ Sidebar Design Section Start ] =========================-->
-		<nav class="sidebar" id="sidebar">
-			<div class="left-sidebar">
-				<div class="main-logo">
-					<a href="../index.html" class="fully_logo">
-						<img
-							src="../assets/image/header/Logo.png"
-							alt="main_Logo"
-							class="img-fluid"
-						/>
-					</a>
-					<a href="index.html" class="favicon_logo">
-						<img
-							src="../assets/image/header/favicon.png"
-							class="img-fluid"
-							alt="favicon_logo"
-						/>
-					</a>
-				</div>
-				<ul class="navbar-second">
-					<li class="navbar-left-li">
-						<a href="../index.html" class="navbar-link">
-							<div class="link-nav">
-								<i class="ri-star-smile-line"></i>
-								<p class="getting-line">Getting Started</p>
-							</div>
-						</a>
-					</li>
-					<li class="navbar-left-li">
-						<a href="javascript:void(0)" class="navbar-link">
-							<div class="link-nav">
-								<i class="ri-dashboard-2-line"></i>
-								<p class="getting-line">Direct Transaction API</p>
-							</div>
-						</a>
-						<ul class="dropdown-data always-open">
-							<li>
-								<a href="./transactions/generatetoken.html" class="drop-down">
-									<span class="http-tag post">POST</span>
-									<!-- <i class="ri-record-circle-line"></i> -->
-									<p class="wrap-text">Generate Token</p>
-								</a>
-							</li>
-							<li>
-								<a href="./transactions/transactions.html" class="drop-down">
-									<span class="http-tag post">POST</span>
-									<!-- <i class="ri-record-circle-line"></i> -->
-									<p class="wrap-text">Transactions</p>
-								</a>
-							</li>
-							<li>
-								<a
-									href="./transactions/gettransactionsbytsid.html"
-									class="drop-down"
-								>
-									<span class="http-tag post">POST</span>
-									<!-- <i class="ri-record-circle-line"></i> -->
-									<p class="wrap-text">Inquiry</p>
-								</a>
-							</li>
-							<li>
-								<a href="./transactions/refund.html" class="drop-down">
-									<span class="http-tag post">POST</span>
-									<!-- <i class="ri-record-circle-line"></i> -->
-									<p class="wrap-text">Refund</p>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="navbar-left-li">
-						<a href="/responsecodes-notification.html" class="navbar-link">
-							<div class="link-nav">
-								<i class="ri-file-text-line"></i>
-								<p class="getting-line">
-									Response Codes & Notification Response
-								</p>
-							</div>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		<!--========================= [ Sidebar Design Section Exit ] =========================-->
-		<!-- main content -->
-		<main class="main container-data" id="main">
-			<div class="container-fluid right-soft">
-				<div class="page-title">
-					<p class="main-title-right">Response codes & Notification</p>
-					<ul class="right-top-ul">
-						<li class="right-top-li">
-							<a href="index.html">Transactworld</a>
-						</li>
-						<li class="right-top-li">Inquiry</li>
-					</ul>
-				</div>
-				<div class="row section">
-					<div class="col-xl-3 col-4 gx-topic">
-						<div class="last-right-card topic-sidebar">
-							<div class="card-header-topic">
-								<p class="hx-card-title">Topics</p>
-							</div>
-							<div class="hx-card-content hx-topic-list">
-								<nav>
-									<ul class="topic-list">
-										<li>
-											<a href="#responsecodes" class="hx-topic active"
-												>Response Codes</a
-											>
-										</li>
-										<li>
-											<a href="#notification" class="hx-topic">Notification</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-9 col-lg-12 col-md-12">
-						<!--=============== [ Response Codes ] ===============-->
-						<div class="gx-block" id="responsecodes">
-							<div class="gx-card gx-page-block">
-								<div class="gx-card-header">
-									<p class="second-main-title">Response Codes</p>
-									<div class="header-tools">
-										<a href="#" class="gx-full-card"
-											><i class="ri-fullscreen-fill"></i
-										></a>
-									</div>
-								</div>
-								<div class="gx-card-content">
-									<table class="status-table">
-										<thead>
-											<tr>
-												<th>Code</th>
-												<th>Description</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>00000</td>
-												<td>Authentication Pending</td>
-											</tr>
-											<tr>
-												<td>00000</td>
-												<td>Transaction Successful</td>
-											</tr>
-											<tr>
-												<td>00000</td>
-												<td>Invalid Card Details</td>
-											</tr>
-											<tr>
-												<td>00000</td>
-												<td>Insufficient Funds</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!--=============== [ Notification ] ===============-->
-						<div class="gx-block" id="notification">
-							<div class="gx-card gx-page-block">
-								<div class="gx-card-header">
-									<p class="second-main-title">Notification</p>
-									<div class="header-tools">
-										<a href="#" class="gx-full-card"
-											><i class="ri-fullscreen-fill"></i
-										></a>
-									</div>
-								</div>
-								<div class="gx-card-content">
-									<pre class="output" id="json-notification"></pre>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-		<!--========================= [ jQuery File ] =========================-->
-		<script src="../assets/js/jquery.min.js"></script>
-		<!--========================= [ Bootstrap File ] =========================-->
-		<script src="../assets/js/bootstrap.bundle.min.js"></script>
-		<!--========================= [ prism File ] =========================-->
-		<script src="../assets/js/prism.js"></script>
-		<script src="../assets/js/prism.min.js"></script>
-		<!--========================= [ Main Javascript File ] =========================-->
-		<script src="../assets/js/main.js"></script>
-	</body>
+          <a
+            href="https://www.transactworld.com/"
+            target="_blank"
+            class="header__logo button-buy"
+          >
+            Visit Website
+          </a>
+        </div>
+      </div>
+    </header>
+    <!--========================= [ Header Section Exit ] =========================-->
+    <!--========================= [ Sidebar Design Section Start ] =========================-->
+    <nav class="sidebar" id="sidebar">
+      <!-- close button for the mobile view and tablet view -->
+      <div class="flex justify-end">
+        <button class="header__toggle lg:hidden px-1 py-1" id="header-toggle">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <div class="left-sidebar">
+        <div class="main-logo">
+          <a href="../index.html" class="fully_logo">
+            <img
+              src="../assets/image/header/Logo.png"
+              alt="main_Logo"
+              class="img-fluid"
+            />
+          </a>
+          <a href="index.html" class="favicon_logo">
+            <img
+              src="../assets/image/header/favicon.png"
+              class="img-fluid"
+              alt="favicon_logo"
+            />
+          </a>
+        </div>
+        <ul class="navbar-second">
+          <li class="navbar-left-li">
+            <a href="../index.html" class="navbar-link">
+              <div class="link-nav">
+                <i class="ri-star-smile-line"></i>
+                <p class="getting-line">Getting Started</p>
+              </div>
+            </a>
+          </li>
+          <li class="navbar-left-li">
+            <a href="javascript:void(0)" class="navbar-link">
+              <div class="link-nav">
+                <i class="ri-dashboard-2-line"></i>
+                <p class="getting-line">Direct Transaction API</p>
+              </div>
+            </a>
+            <ul class="dropdown-data always-open">
+              <li>
+                <a href="./transactions/generatetoken.html" class="drop-down">
+                  <span class="http-tag post">POST</span>
+                  <!-- <i class="ri-record-circle-line"></i> -->
+                  <p class="wrap-text">Generate Token</p>
+                </a>
+              </li>
+              <li>
+                <a href="./transactions/transactions.html" class="drop-down">
+                  <span class="http-tag post">POST</span>
+                  <!-- <i class="ri-record-circle-line"></i> -->
+                  <p class="wrap-text">Transactions</p>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="./transactions/gettransactionsbytsid.html"
+                  class="drop-down"
+                >
+                  <span class="http-tag post">POST</span>
+                  <!-- <i class="ri-record-circle-line"></i> -->
+                  <p class="wrap-text">Inquiry</p>
+                </a>
+              </li>
+              <li>
+                <a href="./transactions/refund.html" class="drop-down">
+                  <span class="http-tag post">POST</span>
+                  <!-- <i class="ri-record-circle-line"></i> -->
+                  <p class="wrap-text">Refund</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="navbar-left-li">
+            <a href="/responsecodes-notification.html" class="navbar-link">
+              <div class="link-nav">
+                <i class="ri-file-text-line"></i>
+                <p class="getting-line">
+                  Response Codes & Notification Response
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--========================= [ Sidebar Design Section Exit ] =========================-->
+    <!-- main content -->
+    <main class="main container-data" id="main">
+      <div class="container-fluid right-soft">
+        <div class="page-title">
+          <p class="main-title-right">Response codes & Notification</p>
+          <ul class="right-top-ul">
+            <li class="right-top-li">
+              <a href="index.html">Transactworld</a>
+            </li>
+            <li class="right-top-li">Inquiry</li>
+          </ul>
+        </div>
+        <div class="row section">
+          <div class="col-xl-3 col-4 gx-topic">
+            <div class="last-right-card topic-sidebar">
+              <div class="card-header-topic">
+                <p class="hx-card-title">Topics</p>
+              </div>
+              <div class="hx-card-content hx-topic-list">
+                <nav>
+                  <ul class="topic-list">
+                    <li>
+                      <a href="#responsecodes" class="hx-topic active"
+                        >Response Codes</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#notification" class="hx-topic">Notification</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-9 col-lg-12 col-md-12">
+            <!--=============== [ Response Codes ] ===============-->
+            <div class="gx-block" id="responsecodes">
+              <div class="gx-card gx-page-block">
+                <div class="gx-card-header">
+                  <p class="second-main-title">Response Codes</p>
+                  <div class="header-tools">
+                    <a href="#" class="gx-full-card"
+                      ><i class="ri-fullscreen-fill"></i
+                    ></a>
+                  </div>
+                </div>
+                <div class="gx-card-content">
+                  <table class="status-table">
+                    <thead>
+                      <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>00000</td>
+                        <td>Authentication Pending</td>
+                      </tr>
+                      <tr>
+                        <td>00000</td>
+                        <td>Transaction Successful</td>
+                      </tr>
+                      <tr>
+                        <td>00000</td>
+                        <td>Invalid Card Details</td>
+                      </tr>
+                      <tr>
+                        <td>00000</td>
+                        <td>Insufficient Funds</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--=============== [ Notification ] ===============-->
+            <div class="gx-block" id="notification">
+              <div class="gx-card gx-page-block">
+                <div class="gx-card-header">
+                  <p class="second-main-title">Notification</p>
+                  <div class="header-tools">
+                    <a href="#" class="gx-full-card"
+                      ><i class="ri-fullscreen-fill"></i
+                    ></a>
+                  </div>
+                </div>
+                <div class="gx-card-content">
+                  <pre class="output" id="json-notification"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--========================= [ jQuery File ] =========================-->
+    <script src="../assets/js/jquery.min.js"></script>
+    <!--========================= [ Bootstrap File ] =========================-->
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!--========================= [ prism File ] =========================-->
+    <script src="../assets/js/prism.js"></script>
+    <script src="../assets/js/prism.min.js"></script>
+    <!--========================= [ Main Javascript File ] =========================-->
+    <script src="../assets/js/main.js"></script>
+  </body>
 </html>
 <!--=============== HEADER ===============-->
 <!--=============== SIDEBAR ===============-->
